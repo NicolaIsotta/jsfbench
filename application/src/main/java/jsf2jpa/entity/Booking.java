@@ -1,22 +1,22 @@
 package jsf2jpa.entity;
 
+import jakarta.persistence.Basic;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.persistence.Transient;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.util.Date;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.CreditCardNumber;
 
 @Entity
 public class Booking implements Serializable {
@@ -103,8 +103,7 @@ public class Booking implements Serializable {
     }
 
     @NotNull(message = "Credit card number is required")
-    @Size(min = 16, max = 16, message = "Credit card number must 16 digits long")
-    @Pattern(regexp = "^\\d*$", message = "Credit card number must be numeric")
+    @CreditCardNumber
     public String getCreditCard() {
         return creditCard;
     }
@@ -138,7 +137,7 @@ public class Booking implements Serializable {
     }
 
     @NotNull(message = "Credit card name is required")
-    @Length(min = 3, max = 70, message = "Credit card name is required")
+    @Size(min = 3, max = 70, message = "Credit card name is required")
     public String getCreditCardName() {
         return creditCardName;
     }

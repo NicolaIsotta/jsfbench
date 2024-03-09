@@ -1,20 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jsf2jpa.beans;
+
+import jsf2jpa.entity.Hotel;
+
+import jakarta.inject.Named;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.inject.Named;
-import jsf2jpa.entity.Hotel;
 
 /**
  *
  * @author lu4242
  */
 @Named("hotelBean")
-@javax.enterprise.context.SessionScoped
+@jakarta.enterprise.context.SessionScoped
 public class HotelBean implements Serializable
 {
     private String searchString;
@@ -73,7 +71,7 @@ public class HotelBean implements Serializable
 
     public boolean isPageEmpty()
     {
-        return !(hotels != null && hotels.size() > 0);
+        return !(hotels != null && !hotels.isEmpty());
     }
     
     public String getSearchString() {

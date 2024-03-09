@@ -4,16 +4,16 @@
  */
 package jsf2jpa.beans;
 
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  *
  * @author lu4242
  */
 @Named("getAction")
-@javax.enterprise.context.RequestScoped
+@jakarta.enterprise.context.RequestScoped
 public class GetAction {
     
     private String action;

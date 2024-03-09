@@ -1,18 +1,18 @@
 package jsf2jpa.beans;
 
 
-import java.io.Serializable;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.event.ActionEvent;
+import jakarta.faces.event.AjaxBehaviorEvent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.persistence.Query;
 
-import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
-import javax.faces.event.AjaxBehaviorEvent;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.persistence.Query;
+import java.io.Serializable;
 
 
 @Named("hotelSearch")
-@javax.enterprise.context.RequestScoped
+@jakarta.enterprise.context.RequestScoped
 public class HotelSearchingAction extends SimpleAction implements Serializable
 {
     private transient BookingApplication bookingApplication;

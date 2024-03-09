@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jsf2jpa.beans;
 
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
 
 /**
  *
@@ -15,6 +11,9 @@ public class SimpleAction
 {
     @Inject
     private JpaRequestCycle jpaRequestCycle;
+
+    @Inject
+    protected BookingSession session;
     
     EntityManager getEntityManager()
     {

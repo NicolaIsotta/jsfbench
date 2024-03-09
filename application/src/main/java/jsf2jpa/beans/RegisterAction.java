@@ -1,18 +1,18 @@
 package jsf2jpa.beans;
 
 
-import java.util.List;
-
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.inject.Named;
-import javax.persistence.EntityManager;
-
-import javax.persistence.Query;
 import jsf2jpa.entity.User;
 
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Named;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+
+import java.util.List;
+
 @Named("register")
-@javax.enterprise.context.RequestScoped
+@jakarta.enterprise.context.RequestScoped
 public class RegisterAction extends SimpleAction
 {
     private User user;
@@ -37,7 +37,7 @@ public class RegisterAction extends SimpleAction
             Query query = em.createQuery("select u.username from User u where u.username = :username");
             query.setParameter("username", user.getUsername());
             List existing = query.getResultList();
-            if(existing.size() == 0)
+            if(existing.isEmpty())
             {
                 try
                 {

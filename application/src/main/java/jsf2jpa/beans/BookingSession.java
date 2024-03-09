@@ -1,17 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jsf2jpa.beans;
 
-import java.io.Serializable;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.inject.Named;
 import jsf2jpa.entity.User;
 
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Named;
+
+import java.io.Serializable;
+
 @Named("bookingSession")
-@javax.enterprise.context.SessionScoped
+@jakarta.enterprise.context.SessionScoped
 public class BookingSession implements Serializable
 {    
     private User user;

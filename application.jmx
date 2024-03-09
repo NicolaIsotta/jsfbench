@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.1 r1853635">
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
-      <stringProp name="TestPlan.comments"></stringProp>
-      <boolProp name="TestPlan.functional_mode">false</boolProp>
-      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
-      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan">
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
         <collectionProp name="Arguments.arguments">
           <elementProp name="thread.count" elementType="Argument">
             <stringProp name="Argument.name">thread.count</stringProp>
@@ -64,22 +61,19 @@
           </elementProp>
         </collectionProp>
       </elementProp>
-      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
     </TestPlan>
     <hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
-        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
-          <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">200</stringProp>
-        </elementProp>
-        <stringProp name="ThreadGroup.num_threads">100</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
-        <longProp name="ThreadGroup.start_time">1229670265000</longProp>
-        <longProp name="ThreadGroup.end_time">1229670265000</longProp>
-        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group">
+        <intProp name="ThreadGroup.num_threads">100</intProp>
+        <intProp name="ThreadGroup.ramp_time">10</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
-        <stringProp name="ThreadGroup.duration"></stringProp>
-        <stringProp name="ThreadGroup.delay"></stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">200</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
       </ThreadGroup>
       <hashTree>
         <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Thread Counter" enabled="true">
@@ -92,23 +86,19 @@
         </CounterConfig>
         <hashTree/>
         <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
           <stringProp name="HTTPSampler.domain">localhost</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path"></stringProp>
-          <stringProp name="HTTPSampler.concurrentPool">4</stringProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
           <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </ConfigTestElement>
         <hashTree/>
         <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
           <collectionProp name="CookieManager.cookies"/>
           <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+          <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
         </CookieManager>
         <hashTree/>
         <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -141,7 +131,7 @@
           </collectionProp>
         </Arguments>
         <hashTree/>
-        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Simple Controller" enabled="true"/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Simple Controller"/>
         <hashTree>
           <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="logging book" enabled="true">
             <boolProp name="LoopController.continue_forever">true</boolProp>
@@ -154,36 +144,33 @@
             </GaussianRandomTimer>
             <hashTree/>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="get login" enabled="true">
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-                <collectionProp name="Arguments.arguments"/>
-              </elementProp>
-              <stringProp name="HTTPSampler.domain"></stringProp>
-              <stringProp name="HTTPSampler.port"></stringProp>
-              <stringProp name="HTTPSampler.protocol"></stringProp>
-              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
               <stringProp name="HTTPSampler.path">${context.path}/home.jsf</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
               <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
               <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                 <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                 <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;javax\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:javax\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
+                <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;jakarta\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:jakarta\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
                 <stringProp name="RegexExtractor.template">$1$</stringProp>
                 <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                 <stringProp name="RegexExtractor.match_number">1</stringProp>
+                <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
               </RegexExtractor>
               <hashTree/>
             </hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="post login" enabled="true">
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <stringProp name="HTTPSampler.path">${context.path}/home.jsf</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="login:username" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -199,12 +186,12 @@
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                     <stringProp name="Argument.name">login:password</stringProp>
                   </elementProp>
-                  <elementProp name="javax.faces.ViewState" elementType="HTTPArgument">
+                  <elementProp name="jakarta.faces.ViewState" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">true</boolProp>
                     <stringProp name="Argument.value">${viewState}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                    <stringProp name="Argument.name">javax.faces.ViewState</stringProp>
+                    <stringProp name="Argument.name">jakarta.faces.ViewState</stringProp>
                   </elementProp>
                   <elementProp name="login_SUBMIT" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -229,28 +216,16 @@
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain"></stringProp>
-              <stringProp name="HTTPSampler.port"></stringProp>
-              <stringProp name="HTTPSampler.protocol"></stringProp>
-              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">${context.path}/home.jsf</stringProp>
-              <stringProp name="HTTPSampler.method">POST</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
             </HTTPSamplerProxy>
             <hashTree>
               <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                 <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                 <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;javax\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:javax\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
+                <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;jakarta\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:jakarta\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
                 <stringProp name="RegexExtractor.template">$1$</stringProp>
                 <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                 <stringProp name="RegexExtractor.match_number">1</stringProp>
+                <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
               </RegexExtractor>
               <hashTree/>
             </hashTree>
@@ -271,10 +246,16 @@
               <IfController guiclass="IfControllerPanel" testclass="IfController" testname="if not ajax" enabled="true">
                 <stringProp name="IfController.condition">${include.ajax} &lt;= 0</stringProp>
                 <boolProp name="IfController.evaluateAll">false</boolProp>
+                <boolProp name="IfController.useExpression">false</boolProp>
               </IfController>
               <hashTree>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="post search" enabled="true">
-                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+                  <stringProp name="HTTPSampler.path">${context.path}/main.jsf</stringProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
                     <collectionProp name="Arguments.arguments">
                       <elementProp name="main_SUBMIT" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -304,12 +285,12 @@
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
                         <stringProp name="Argument.name">main:pageSize</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.ViewState" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.ViewState" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">true</boolProp>
                         <stringProp name="Argument.value">${viewState}</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.ViewState</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.ViewState</stringProp>
                       </elementProp>
                       <elementProp name="main:findHotelsPost" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -320,28 +301,16 @@
                       </elementProp>
                     </collectionProp>
                   </elementProp>
-                  <stringProp name="HTTPSampler.domain"></stringProp>
-                  <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.protocol"></stringProp>
-                  <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-                  <stringProp name="HTTPSampler.path">${context.path}/main.jsf</stringProp>
-                  <stringProp name="HTTPSampler.method">POST</stringProp>
-                  <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
-                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree>
                   <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                     <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                     <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                    <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;javax\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:javax\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
+                    <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;jakarta\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:jakarta\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
                     <stringProp name="RegexExtractor.template">$1$</stringProp>
                     <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                     <stringProp name="RegexExtractor.match_number">1</stringProp>
+                    <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
                   </RegexExtractor>
                   <hashTree/>
                 </hashTree>
@@ -349,10 +318,15 @@
               <IfController guiclass="IfControllerPanel" testclass="IfController" testname="if ajax" enabled="true">
                 <stringProp name="IfController.condition">${include.ajax} &gt; 0</stringProp>
                 <boolProp name="IfController.evaluateAll">false</boolProp>
+                <boolProp name="IfController.useExpression">false</boolProp>
               </IfController>
               <hashTree>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ajax post search" enabled="true">
-                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <stringProp name="HTTPSampler.path">${context.path}/main.jsf</stringProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
                     <collectionProp name="Arguments.arguments">
                       <elementProp name="main_SUBMIT" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -382,12 +356,12 @@
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
                         <stringProp name="Argument.name">main:pageSize</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.ViewState" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.ViewState" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">true</boolProp>
                         <stringProp name="Argument.value">${viewState}</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.ViewState</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.ViewState</stringProp>
                       </elementProp>
                       <elementProp name="main:findHotels" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -396,72 +370,60 @@
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
                         <stringProp name="Argument.name">main:findHotels</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.behavior.event" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.behavior.event" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
                         <stringProp name="Argument.value">keyup</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.behavior.event</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.behavior.event</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.partial.ajax" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.partial.ajax" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
                         <stringProp name="Argument.value">true</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.partial.ajax</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.partial.ajax</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.partial.event" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.partial.event" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
                         <stringProp name="Argument.value">keyup</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.partial.event</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.partial.event</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.partial.execute" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.partial.execute" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
                         <stringProp name="Argument.value">@this main:searchString</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.partial.execute</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.partial.execute</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.partial.render" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.partial.render" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
                         <stringProp name="Argument.value">main:searchResults</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.partial.render</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.partial.render</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.source" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.source" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
                         <stringProp name="Argument.value">main:searchString</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.source</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.source</stringProp>
                       </elementProp>
                     </collectionProp>
                   </elementProp>
-                  <stringProp name="HTTPSampler.domain"></stringProp>
-                  <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.protocol"></stringProp>
-                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-                  <stringProp name="HTTPSampler.path">${context.path}/main.jsf</stringProp>
-                  <stringProp name="HTTPSampler.method">POST</stringProp>
-                  <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
-                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree>
                   <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                     <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                     <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                    <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;javax\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:javax\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
+                    <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;jakarta\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:jakarta\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
                     <stringProp name="RegexExtractor.template">$1$</stringProp>
                     <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                     <stringProp name="RegexExtractor.match_number">0</stringProp>
+                    <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
                   </RegexExtractor>
                   <hashTree/>
                   <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Gestor de Cabecera HTTP" enabled="true">
@@ -479,8 +441,14 @@
                   <hashTree/>
                 </hashTree>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="get view hotel" enabled="true">
-                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="get view hotel">
+                <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+                <stringProp name="HTTPSampler.path">${context.path}/hotel.jsf</stringProp>
+                <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
                   <collectionProp name="Arguments.arguments">
                     <elementProp name="hotid" elementType="HTTPArgument">
                       <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -491,40 +459,34 @@
                     </elementProp>
                   </collectionProp>
                 </elementProp>
-                <stringProp name="HTTPSampler.domain"></stringProp>
-                <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.protocol"></stringProp>
-                <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-                <stringProp name="HTTPSampler.path">${context.path}/hotel.jsf</stringProp>
-                <stringProp name="HTTPSampler.method">GET</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
-                <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree>
                 <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                   <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                   <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                  <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;javax\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:javax\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
+                  <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;jakarta\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:jakarta\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
                   <stringProp name="RegexExtractor.template">$1$</stringProp>
                   <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                   <stringProp name="RegexExtractor.match_number">0</stringProp>
+                  <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
                 </RegexExtractor>
                 <hashTree/>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="post book hotel" enabled="true">
-                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="post book hotel">
+                <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+                <stringProp name="HTTPSampler.path">${context.path}/hotel.jsf</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
                   <collectionProp name="Arguments.arguments">
-                    <elementProp name="javax.faces.ViewState" elementType="HTTPArgument">
+                    <elementProp name="jakarta.faces.ViewState" elementType="HTTPArgument">
                       <boolProp name="HTTPArgument.always_encode">true</boolProp>
                       <stringProp name="Argument.value">${viewState}</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
                       <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                      <stringProp name="Argument.name">javax.faces.ViewState</stringProp>
+                      <stringProp name="Argument.name">jakarta.faces.ViewState</stringProp>
                     </elementProp>
                     <elementProp name="hotel" elementType="HTTPArgument">
                       <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -554,47 +516,41 @@
                       <boolProp name="HTTPArgument.use_equals">true</boolProp>
                       <stringProp name="Argument.name">hotel_SUBMIT</stringProp>
                     </elementProp>
-                    <elementProp name="hotid" elementType="HTTPArgument">
+                    <elementProp name="hotel:hiddenId" elementType="HTTPArgument">
                       <boolProp name="HTTPArgument.always_encode">false</boolProp>
                       <stringProp name="Argument.value">1</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
                       <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                      <stringProp name="Argument.name">hotid</stringProp>
+                      <stringProp name="Argument.name">hotel:hiddenId</stringProp>
                     </elementProp>
                   </collectionProp>
                 </elementProp>
-                <stringProp name="HTTPSampler.domain"></stringProp>
-                <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.protocol"></stringProp>
-                <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-                <stringProp name="HTTPSampler.path">${context.path}/hotel.jsf</stringProp>
-                <stringProp name="HTTPSampler.method">POST</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree>
                 <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                   <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                   <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                  <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;javax\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:javax\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
+                  <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;jakarta\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:jakarta\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
                   <stringProp name="RegexExtractor.template">$1$</stringProp>
                   <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                   <stringProp name="RegexExtractor.match_number">0</stringProp>
+                  <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
                 </RegexExtractor>
                 <hashTree/>
               </hashTree>
               <IfController guiclass="IfControllerPanel" testclass="IfController" testname="if ajax" enabled="true">
                 <stringProp name="IfController.condition">${include.ajax} &gt; 0</stringProp>
                 <boolProp name="IfController.evaluateAll">false</boolProp>
+                <boolProp name="IfController.useExpression">false</boolProp>
               </IfController>
               <hashTree>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ajax post cc number" enabled="true">
-                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+                  <stringProp name="HTTPSampler.path">${context.path}/book.jsf</stringProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
                     <collectionProp name="Arguments.arguments">
                       <elementProp name="booking" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -610,79 +566,67 @@
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
                         <stringProp name="Argument.name">booking:creditCard</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.ViewState" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.ViewState" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">true</boolProp>
                         <stringProp name="Argument.value">${viewState}</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.ViewState</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.ViewState</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.behavior.event" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.behavior.event" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
                         <stringProp name="Argument.value">blur</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.behavior.event</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.behavior.event</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.partial.ajax" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.partial.ajax" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
                         <stringProp name="Argument.value">true</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.partial.ajax</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.partial.ajax</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.partial.event" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.partial.event" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
                         <stringProp name="Argument.value">blur</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.partial.event</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.partial.event</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.partial.execute" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.partial.execute" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
                         <stringProp name="Argument.value">booking:creditCard</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.partial.execute</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.partial.execute</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.partial.render" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.partial.render" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
                         <stringProp name="Argument.value">booking:creditCardDecorate</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.partial.render</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.partial.render</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.source" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.source" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
                         <stringProp name="Argument.value">booking:creditCard</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.source</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.source</stringProp>
                       </elementProp>
                     </collectionProp>
                   </elementProp>
-                  <stringProp name="HTTPSampler.domain"></stringProp>
-                  <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.protocol"></stringProp>
-                  <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-                  <stringProp name="HTTPSampler.path">${context.path}/book.jsf</stringProp>
-                  <stringProp name="HTTPSampler.method">POST</stringProp>
-                  <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
-                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree>
                   <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                     <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                     <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                    <stringProp name="RegexExtractor.regex">&lt;update id=&quot;j_id[_v10]*:javax\.faces\.ViewState:[0-9]&quot;&gt;&lt;!\[CDATA\[(.+?)\]\]&gt;&lt;\/update&gt;</stringProp>
+                    <stringProp name="RegexExtractor.regex">&lt;update id=&quot;j_id[_v10]*:jakarta\.faces\.ViewState:[0-9]&quot;&gt;&lt;!\[CDATA\[(.+?)\]\]&gt;&lt;\/update&gt;</stringProp>
                     <stringProp name="RegexExtractor.template">$1$</stringProp>
                     <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                     <stringProp name="RegexExtractor.match_number">1</stringProp>
+                    <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
                   </RegexExtractor>
                   <hashTree/>
                   <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Gestor de Cabecera HTTP" enabled="true">
@@ -700,7 +644,12 @@
                   <hashTree/>
                 </hashTree>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ajax post cc name" enabled="true">
-                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+                  <stringProp name="HTTPSampler.path">${context.path}/book.jsf</stringProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
                     <collectionProp name="Arguments.arguments">
                       <elementProp name="booking" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -716,79 +665,67 @@
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
                         <stringProp name="Argument.name">booking:creditCardName</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.ViewState" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.ViewState" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">true</boolProp>
                         <stringProp name="Argument.value">${viewState}</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.ViewState</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.ViewState</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.behavior.event" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.behavior.event" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
                         <stringProp name="Argument.value">blur</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.behavior.event</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.behavior.event</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.partial.ajax" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.partial.ajax" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
                         <stringProp name="Argument.value">true</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.partial.ajax</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.partial.ajax</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.partial.event" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.partial.event" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
                         <stringProp name="Argument.value">blur</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.partial.event</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.partial.event</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.partial.execute" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.partial.execute" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
                         <stringProp name="Argument.value">booking:creditCardName</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.partial.execute</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.partial.execute</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.partial.render" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.partial.render" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
                         <stringProp name="Argument.value">booking:creditCardNameDecorate</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.partial.render</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.partial.render</stringProp>
                       </elementProp>
-                      <elementProp name="javax.faces.source" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.source" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
                         <stringProp name="Argument.value">booking:creditCardName</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.source</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.source</stringProp>
                       </elementProp>
                     </collectionProp>
                   </elementProp>
-                  <stringProp name="HTTPSampler.domain"></stringProp>
-                  <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.protocol"></stringProp>
-                  <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-                  <stringProp name="HTTPSampler.path">${context.path}/book.jsf</stringProp>
-                  <stringProp name="HTTPSampler.method">POST</stringProp>
-                  <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
-                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree>
                   <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                     <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                     <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                    <stringProp name="RegexExtractor.regex">&lt;update id=&quot;j_id[_v10]*:javax\.faces\.ViewState:[0-9]&quot;&gt;&lt;!\[CDATA\[(.+?)\]\]&gt;&lt;\/update&gt;</stringProp>
+                    <stringProp name="RegexExtractor.regex">&lt;update id=&quot;j_id[_v10]*:jakarta\.faces\.ViewState:[0-9]&quot;&gt;&lt;!\[CDATA\[(.+?)\]\]&gt;&lt;\/update&gt;</stringProp>
                     <stringProp name="RegexExtractor.template">$1$</stringProp>
                     <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                     <stringProp name="RegexExtractor.match_number">1</stringProp>
+                    <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
                   </RegexExtractor>
                   <hashTree/>
                   <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Gestor de Cabecera HTTP" enabled="true">
@@ -806,8 +743,14 @@
                   <hashTree/>
                 </hashTree>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="post booking details" enabled="true">
-                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="post booking details">
+                <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+                <stringProp name="HTTPSampler.path">${context.path}/book.jsf</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
                   <collectionProp name="Arguments.arguments">
                     <elementProp name="booking" elementType="HTTPArgument">
                       <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -818,14 +761,14 @@
                     </elementProp>
                     <elementProp name="booking:checkinDate" elementType="HTTPArgument">
                       <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">06/06/2022</stringProp>
+                      <stringProp name="Argument.value">2030-01-01</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
                       <boolProp name="HTTPArgument.use_equals">true</boolProp>
                       <stringProp name="Argument.name">booking:checkinDate</stringProp>
                     </elementProp>
                     <elementProp name="booking:checkoutDate" elementType="HTTPArgument">
                       <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">06/07/2022</stringProp>
+                      <stringProp name="Argument.value">2030-01-02</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
                       <boolProp name="HTTPArgument.use_equals">true</boolProp>
                       <stringProp name="Argument.name">booking:checkoutDate</stringProp>
@@ -846,7 +789,7 @@
                     </elementProp>
                     <elementProp name="booking:creditCard" elementType="HTTPArgument">
                       <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">1234123412341234</stringProp>
+                      <stringProp name="Argument.value">5555555555554444</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
                       <boolProp name="HTTPArgument.use_equals">true</boolProp>
                       <stringProp name="Argument.name">booking:creditCard</stringProp>
@@ -872,12 +815,12 @@
                       <boolProp name="HTTPArgument.use_equals">true</boolProp>
                       <stringProp name="Argument.name">booking:creditCardExpiryYear</stringProp>
                     </elementProp>
-                    <elementProp name="javax.faces.ViewState" elementType="HTTPArgument">
+                    <elementProp name="jakarta.faces.ViewState" elementType="HTTPArgument">
                       <boolProp name="HTTPArgument.always_encode">true</boolProp>
                       <stringProp name="Argument.value">${viewState}</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
                       <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                      <stringProp name="Argument.name">javax.faces.ViewState</stringProp>
+                      <stringProp name="Argument.name">jakarta.faces.ViewState</stringProp>
                     </elementProp>
                     <elementProp name="booking:proceed" elementType="HTTPArgument">
                       <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -895,33 +838,27 @@
                     </elementProp>
                   </collectionProp>
                 </elementProp>
-                <stringProp name="HTTPSampler.domain"></stringProp>
-                <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.protocol"></stringProp>
-                <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-                <stringProp name="HTTPSampler.path">${context.path}/book.jsf</stringProp>
-                <stringProp name="HTTPSampler.method">POST</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree>
                 <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                   <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                   <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                  <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;javax\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:javax\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
+                  <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;jakarta\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:jakarta\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
                   <stringProp name="RegexExtractor.template">$1$</stringProp>
                   <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                   <stringProp name="RegexExtractor.match_number">1</stringProp>
+                  <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
                 </RegexExtractor>
                 <hashTree/>
               </hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="post confirm booking" enabled="true">
-                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+                <stringProp name="HTTPSampler.path">${context.path}/confirm.jsf</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
                   <collectionProp name="Arguments.arguments">
                     <elementProp name="confirm" elementType="HTTPArgument">
                       <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -937,12 +874,12 @@
                       <boolProp name="HTTPArgument.use_equals">true</boolProp>
                       <stringProp name="Argument.name">confirm:confirm</stringProp>
                     </elementProp>
-                    <elementProp name="javax.faces.ViewState" elementType="HTTPArgument">
+                    <elementProp name="jakarta.faces.ViewState" elementType="HTTPArgument">
                       <boolProp name="HTTPArgument.always_encode">true</boolProp>
                       <stringProp name="Argument.value">${viewState}</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
                       <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                      <stringProp name="Argument.name">javax.faces.ViewState</stringProp>
+                      <stringProp name="Argument.name">jakarta.faces.ViewState</stringProp>
                     </elementProp>
                     <elementProp name="confirm_SUBMIT" elementType="HTTPArgument">
                       <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -953,28 +890,16 @@
                     </elementProp>
                   </collectionProp>
                 </elementProp>
-                <stringProp name="HTTPSampler.domain"></stringProp>
-                <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.protocol"></stringProp>
-                <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-                <stringProp name="HTTPSampler.path">${context.path}/confirm.jsf</stringProp>
-                <stringProp name="HTTPSampler.method">POST</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree>
                 <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                   <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                   <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                  <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;javax\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:javax\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
+                  <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;jakarta\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:jakarta\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
                   <stringProp name="RegexExtractor.template">$1$</stringProp>
                   <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                   <stringProp name="RegexExtractor.match_number">1</stringProp>
+                  <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
                 </RegexExtractor>
                 <hashTree/>
                 <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex cancel" enabled="true">
@@ -984,23 +909,30 @@
                   <stringProp name="RegexExtractor.template">$1$</stringProp>
                   <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                   <stringProp name="RegexExtractor.match_number">1</stringProp>
+                  <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
                 </RegexExtractor>
                 <hashTree/>
               </hashTree>
               <IfController guiclass="IfControllerPanel" testclass="IfController" testname="if delete" enabled="true">
                 <stringProp name="IfController.condition">${include.delete} &gt; 0</stringProp>
                 <boolProp name="IfController.evaluateAll">false</boolProp>
+                <boolProp name="IfController.useExpression">false</boolProp>
               </IfController>
               <hashTree>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="cancel booking" enabled="true">
-                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <stringProp name="HTTPSampler.path">${context.path}/main.jsf</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
                     <collectionProp name="Arguments.arguments">
-                      <elementProp name="javax.faces.ViewState" elementType="HTTPArgument">
+                      <elementProp name="jakarta.faces.ViewState" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">true</boolProp>
                         <stringProp name="Argument.value">${viewState}</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">javax.faces.ViewState</stringProp>
+                        <stringProp name="Argument.name">jakarta.faces.ViewState</stringProp>
                       </elementProp>
                       <elementProp name="bookings_SUBMIT" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -1032,28 +964,16 @@
                       </elementProp>
                     </collectionProp>
                   </elementProp>
-                  <stringProp name="HTTPSampler.domain"></stringProp>
-                  <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.protocol"></stringProp>
-                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-                  <stringProp name="HTTPSampler.path">${context.path}/main.jsf</stringProp>
-                  <stringProp name="HTTPSampler.method">POST</stringProp>
-                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree>
                   <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                     <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                     <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                    <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;javax\.faces\.ViewState&quot; id=&quot;j_id__v_0:javax\.faces\.ViewState:1&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; /&gt;</stringProp>
+                    <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;jakarta\.faces\.ViewState&quot; id=&quot;j_id__v_0:jakarta\.faces\.ViewState:1&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; /&gt;</stringProp>
                     <stringProp name="RegexExtractor.template">$1$</stringProp>
                     <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                     <stringProp name="RegexExtractor.match_number">1</stringProp>
+                    <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
                   </RegexExtractor>
                   <hashTree/>
                 </hashTree>
@@ -1062,10 +982,16 @@
             <IfController guiclass="IfControllerPanel" testclass="IfController" testname="if logout" enabled="true">
               <stringProp name="IfController.condition">${include.logout} &gt; 0</stringProp>
               <boolProp name="IfController.evaluateAll">false</boolProp>
+              <boolProp name="IfController.useExpression">false</boolProp>
             </IfController>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="get logout" enabled="true">
-                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <stringProp name="HTTPSampler.path">${context.path}/process.jsf</stringProp>
+                <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
                   <collectionProp name="Arguments.arguments">
                     <elementProp name="action" elementType="HTTPArgument">
                       <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -1076,19 +1002,6 @@
                     </elementProp>
                   </collectionProp>
                 </elementProp>
-                <stringProp name="HTTPSampler.domain"></stringProp>
-                <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.protocol"></stringProp>
-                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-                <stringProp name="HTTPSampler.path">${context.path}/process.jsf</stringProp>
-                <stringProp name="HTTPSampler.method">GET</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
-                <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
@@ -1131,7 +1044,7 @@
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="StatGraphVisualizer" testclass="ResultCollector" testname="Aggregate Graph" enabled="true">
+        <ResultCollector guiclass="StatGraphVisualizer" testclass="ResultCollector" testname="Aggregate Graph">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>

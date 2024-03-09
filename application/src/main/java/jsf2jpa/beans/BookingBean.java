@@ -1,19 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jsf2jpa.beans;
 
-import java.io.Serializable;
-import javax.inject.Named;
 import jsf2jpa.entity.Booking;
+
+import jakarta.inject.Named;
+
+import java.io.Serializable;
 
 /**
  *
  * @author lu4242
  */
 @Named("bookingBean")
-@javax.enterprise.context.SessionScoped
+@jakarta.enterprise.context.SessionScoped
 public class BookingBean implements Serializable {
     
     private Booking booking;

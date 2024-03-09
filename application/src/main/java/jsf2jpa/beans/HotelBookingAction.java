@@ -1,23 +1,25 @@
 package jsf2jpa.beans;
 
-import java.util.Calendar;
-
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.persistence.EntityManager;
-
 import jsf2jpa.entity.Booking;
 import jsf2jpa.entity.Hotel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.persistence.EntityManager;
+
+import java.util.Calendar;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 @Named("hotelBooking")
-@javax.enterprise.context.RequestScoped
+@jakarta.enterprise.context.RequestScoped
 public class HotelBookingAction extends SimpleAction {
 
-    protected static final Logger log = LoggerFactory.getLogger(HotelBookingAction.class);        
+    protected static final Logger log = LogManager.getLogger(HotelBookingAction.class);        
     
     @Inject
     private BookingSession bookingSession;
@@ -34,7 +36,7 @@ public class HotelBookingAction extends SimpleAction {
 
     private boolean bookingValid;
     
-    public void selectHotel()
+    public String selectHotel()
     {
         if (getHotelId() != null)
         {
@@ -42,21 +44,17 @@ public class HotelBookingAction extends SimpleAction {
         }
         if (getHotel() == null)
         {
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.getApplication().getNavigationHandler().handleNavigation(
-                    facesContext, null, "main");
+            return "main";
         }
+        return null;
     }
     
     public String bookHotel()
     {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        String hotid = facesContext.getExternalContext().getRequestParameterMap().get("hotid");
-        if (hotid != null)
+        if (hotelId != null)
         {
             try
             {
-                hotelId = Long.valueOf(hotid);
                 hotel = getEntityManager().find(Hotel.class, hotelId);
                 Booking booking = new Booking(getHotel(), getBookingSession().getUser());
                 Calendar calendar = Calendar.getInstance();

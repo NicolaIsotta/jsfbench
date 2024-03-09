@@ -1,26 +1,27 @@
 package jsf2jpa.beans;
 
 
+import jsf2jpa.entity.Booking;
+
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+
 import java.io.Serializable;
 import java.util.List;
-import javax.enterprise.context.SessionScoped;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
-import jsf2jpa.entity.Booking;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Named("bookingList")
 @SessionScoped
 public class BookingListAction implements Serializable {
 
-    protected static final Logger log = LoggerFactory.getLogger(HotelBookingAction.class);        
+    protected static final Logger log = LogManager.getLogger(HotelBookingAction.class);        
     
     @Inject
     private BookingSession bookingSession;
@@ -36,7 +37,7 @@ public class BookingListAction implements Serializable {
     {
         Query query = em.createQuery("select b from Booking b"
                 + " where b.user.username = :username order by b.checkinDate");
-        query.setParameter("username", getBookingSession().getUser().getUsername());
+        query.setParameter("username", bookingSession.getUser().getUsername());
         bookings = query.getResultList();
     }    
 
@@ -81,24 +82,10 @@ public class BookingListAction implements Serializable {
         return facesContext.getApplication().evaluateExpressionGet(
                 facesContext, "#{jpaRequestCycle}", JpaRequestCycle.class).getEntityManager();
     }
-
-    /**
-     * @return the bookingSession
-     */
-    public BookingSession getBookingSession() {
-        return bookingSession;
-    }
-
-    /**
-     * @param bookingSession the bookingSession to set
-     */
-    public void setBookingSession(BookingSession bookingSession) {
-        this.bookingSession = bookingSession;
-    }
     
     public boolean isPageEmpty()
     {
-        return !(bookings != null && bookings.size() > 0);
+        return !(bookings != null && !bookings.isEmpty());
     }
 
 }

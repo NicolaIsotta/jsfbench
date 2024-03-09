@@ -1,13 +1,13 @@
 package jsf2jpa.beans;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import jsf2jpa.entity.User;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Named("changePassword")
 @RequestScoped
@@ -21,7 +21,7 @@ public class ChangePasswordAction extends SimpleAction {
     @PostConstruct
     public void init()
     {
-        user = getBookingSession().getUser();
+        user = bookingSession.getUser();
     }
     
     public User getUser()
@@ -61,20 +61,6 @@ public class ChangePasswordAction extends SimpleAction {
             verify = null;
             return null;
         }
-    }
-
-    /**
-     * @return the bookingSession
-     */
-    public BookingSession getBookingSession() {
-        return bookingSession;
-    }
-
-    /**
-     * @param bookingSession the bookingSession to set
-     */
-    public void setBookingSession(BookingSession bookingSession) {
-        this.bookingSession = bookingSession;
     }
 
     private void revertUser() {

@@ -5,14 +5,14 @@
             <goals>
                 <goal>clean</goal>
                 <goal>package</goal>
-                <goal>jetty:run-exploded</goal>
+                <goal>jetty:run-war</goal>
             </goals>
             <properties>
                 <skipTests>true</skipTests>
                 <jpda.listen>maven</jpda.listen>
             </properties>
             <activatedProfiles>
-                <activatedProfile>myfaces-23</activatedProfile>
+                <activatedProfile>myfaces</activatedProfile>
             </activatedProfiles>
         </action>
         <action>
@@ -20,13 +20,13 @@
             <goals>
                 <goal>clean</goal>
                 <goal>package</goal>
-                <goal>jetty:run-exploded</goal>
+                <goal>jetty:run-war</goal>
             </goals>
             <properties>
                 <skipTests>true</skipTests>
             </properties>
             <activatedProfiles>
-                <activatedProfile>myfaces-23</activatedProfile>
+                <activatedProfile>myfaces</activatedProfile>
             </activatedProfiles>
         </action>
     </actions>

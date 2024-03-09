@@ -1,23 +1,23 @@
 package jsf2jpa.beans;
 
-import java.util.List;
-import javax.enterprise.inject.spi.CDI;
-
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.inject.Named;
-import javax.persistence.Query;
-import javax.persistence.EntityManager;
-
 import jsf2jpa.entity.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Named;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Named("authenticator")
-@javax.enterprise.context.RequestScoped
+@jakarta.enterprise.context.RequestScoped
 public class AuthenticatorAction extends SimpleAction
 {
-    protected static final Logger logger = LoggerFactory.getLogger(AuthenticatorAction.class);
+    protected static final Logger logger = LogManager.getLogger(AuthenticatorAction.class);
     
     private User user;
     
@@ -38,7 +38,7 @@ public class AuthenticatorAction extends SimpleAction
         query.setParameter("password", user.getPassword());
         List<User> users = query.getResultList();
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        if (users.size() == 0) {
+        if (users.isEmpty()) {
             if (BookingApplication.LOG_ENABLED)
             {
                 logger.error("Login failed");
@@ -47,7 +47,6 @@ public class AuthenticatorAction extends SimpleAction
             return null;
         }
         User user = users.get(0);
-        BookingSession session = CDI.current().select(BookingSession.class).get();
         session.setUser(user);
         if (BookingApplication.LOG_ENABLED)
         {
@@ -55,6 +54,6 @@ public class AuthenticatorAction extends SimpleAction
         }
         facesContext.addMessage(null, new FacesMessage("Login succeeded"));
         session.info("Welcome, " + user.getUsername());
-        return "main";
+        return "main?faces-redirect=true";
     }
 }
