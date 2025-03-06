@@ -11,7 +11,7 @@ The big difference is that this benchmark simulates a real-world application wit
 NOTE:
 MyFaces and Mojarra are both configured for better performance. It does not test stateless view or MyFaces ViewPooling. There should not be a big difference.
 
-## Results 2024-03-06
+## Results 2025-03-06
 
 |            | Average     | Median      | 90th pct    | Throughput |
 | --- | ---: | ---: | ---: | ---: |
