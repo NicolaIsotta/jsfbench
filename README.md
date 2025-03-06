@@ -11,17 +11,22 @@ The big difference is that this benchmark simulates a real-world application wit
 NOTE:
 MyFaces and Mojarra are both configured for better performance. It does not test stateless view or MyFaces ViewPooling. There should not be a big difference.
 
-## Results 2024-03-09
+## Results 2024-03-06
 
 |            | Average     | Median      | 90th pct    | Throughput |
 | --- | ---: | ---: | ---: | ---: |
-| Mojarra 4  |      2.80ms |      2.00ms |      3.00ms |    4373.13 |
-| MyFaces 4  |      1.18ms |      1.00ms |      2.00ms |    4526.78 |
+| Mojarra 4  |      2.56ms |      3.00ms |      4.00ms |    1789.30 |
+| MyFaces 4  |      1.30ms |      2.00ms |      3.00ms |    2027.43 |
 
+Test configuration:
+- AMD Ryzen 7 8845HS w/ Radeon 780M Graphics 3.80 GHz
+- 32 GB DDR5 6400 MHz
+- Windows 11 Home 26100.3194
+- OpenJDK Runtime Environment Temurin-17.0.12+7 (build 17.0.12+7)
 
 ## How to run it? 
 
-Currently only tested on Windows 11 + JDK 11 (Adoptium)
+Requires Java >= 11 and Maven to build the project.
 
 ### Configure Tomcat
 1) download Tomcat 10.1.X
@@ -41,6 +46,4 @@ Currently only tested on Windows 11 + JDK 11 (Adoptium)
 5) open the ./application.jmx via JMeter
 6) run it once for a warmup
 7) clean the results
-8) run again and see the results under Test Plan/Thread Group/Aggregate Grapp
-
-
+8) run again and see the results under Test Plan/Thread Group/Aggregate Graph
