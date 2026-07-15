@@ -1,11 +1,11 @@
 package jsf2jpa.beans;
 
-import jsf2jpa.entity.Hotel;
-
 import jakarta.inject.Named;
 
 import java.io.Serializable;
 import java.util.List;
+
+import jsf2jpa.entity.Hotel;
 
 /**
  *

@@ -11,18 +11,34 @@ The big difference is that this benchmark simulates a real-world application wit
 NOTE:
 MyFaces and Mojarra are both configured for better performance. It does not test stateless view or MyFaces ViewPooling. There should not be a big difference.
 
-## Results 2025-03-06
+## Results
+
+### 2025-03-06
 
 |            | Average     | Median      | 90th pct    | Throughput |
 | --- | ---: | ---: | ---: | ---: |
-| Mojarra 4  |      2.56ms |      3.00ms |      4.00ms |    1789.30 |
-| MyFaces 4  |      1.30ms |      2.00ms |      3.00ms |    2027.43 |
+| Mojarra 4.0.10  |      2.56ms |      3.00ms |      4.00ms |    1789.30 |
+| MyFaces 4.0.2   |      1.30ms |      2.00ms |      3.00ms |    2027.43 |
 
 Test configuration:
 - AMD Ryzen 7 8845HS w/ Radeon 780M Graphics 3.80 GHz
 - 32 GB DDR5 6400 MHz
 - Windows 11 Home 26100.3194
 - OpenJDK Runtime Environment Temurin-17.0.12+7 (build 17.0.12+7)
+
+### 2026-07-15
+
+|            | Average     | Median      | 90th pct    | 95th pct    | 99th pct    | Throughput |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Mojarra 4.0.19  |      1.20ms |      1.00ms |      1.00ms |      2.00ms |      3.00ms |    3415.48 |
+| MyFaces 4.0.3   |      1.10ms |      1.00ms |      1.00ms |      2.00ms |      2.00ms |    3419.03 |
+
+Test configuration:
+- AMD Ryzen 7 8845HS w/ Radeon 780M Graphics 3.80 GHz
+- 32 GB DDR5 6400 MHz
+- Windows 11 Home 26200.8655
+- OpenJDK Runtime Environment Zulu25.34+17-CA (build 25.0.3+9-LTS)
+- Tomcat 10.1.56
 
 ## How to run it? 
 
@@ -41,9 +57,8 @@ Requires Java >= 11 and Maven to build the project.
 ### Run via JMeter
 1) download JMeter 5.6+
 2) Increase MaxUserPort if you are on Windows: https://deploymentresearch.com/research/post/532/fix-for-windows-10-exhausted-pool-of-tcp-ip-ports
-3) run one of the tomcats (e.g. ./tomcat-myfaces/bin/startup.bat)
-4) run jmeter (./jmeter/bin/jmeter.bat)
-5) open the ./application.jmx via JMeter
+3) run one of the tomcats (e.g. `./tomcat-myfaces/bin/startup.bat`)
+4) run jmeter via command line (e.g. `jmeter -n -t application.jmx -l results.jtl -e -o report-output`)
 6) run it once for a warmup
 7) clean the results
-8) run again and see the results under Test Plan/Thread Group/Aggregate Graph
+8) run again and see the results under /report-output/index.html

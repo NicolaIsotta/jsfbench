@@ -77,10 +77,10 @@
         <param-name>org.apache.myfaces.annotation.SCAN_PACKAGES</param-name>
         <param-value>jsf2jpa</param-value>
     </context-param>
-
-
-
-
+    <context-param>
+        <param-name>org.apache.myfaces.SECRET</param-name>
+        <param-value>asdjhaygsdas7286137812sai789723e12uhdjassahd</param-value>
+    </context-param>
 
     <context-param>
         <param-name>com.sun.faces.numberOfLogicalViews</param-name>
@@ -112,15 +112,10 @@
         <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>              
         <load-on-startup>1</load-on-startup>        
     </servlet>
-    
+
     <servlet-mapping>              
         <servlet-name>Faces Servlet</servlet-name>              
-        <url-pattern>*.jsf</url-pattern>        
-    </servlet-mapping>  
-    
-    <servlet-mapping>              
-        <servlet-name>Faces Servlet</servlet-name>              
-        <url-pattern>/faces/*</url-pattern>        
-    </servlet-mapping>     
+        <url-pattern>*.xhtml</url-pattern>        
+    </servlet-mapping>    
 
 </web-app>

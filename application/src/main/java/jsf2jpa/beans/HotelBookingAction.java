@@ -1,8 +1,5 @@
 package jsf2jpa.beans;
 
-import jsf2jpa.entity.Booking;
-import jsf2jpa.entity.Hotel;
-
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
@@ -13,6 +10,9 @@ import java.util.Calendar;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import jsf2jpa.entity.Booking;
+import jsf2jpa.entity.Hotel;
 
 
 @Named("hotelBooking")

@@ -1,12 +1,12 @@
 package jsf2jpa.beans;
 
-import jsf2jpa.entity.User;
-
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
+
+import jsf2jpa.entity.User;
 
 @Named("bookingSession")
 @jakarta.enterprise.context.SessionScoped

@@ -1,17 +1,17 @@
 package jsf2jpa.beans;
 
-import jsf2jpa.entity.User;
-
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import jsf2jpa.entity.User;
 
 @Named("authenticator")
 @jakarta.enterprise.context.RequestScoped
@@ -32,8 +32,8 @@ public class AuthenticatorAction extends SimpleAction
 
     public String authenticate() {
         EntityManager em = getEntityManager();
-        Query query = em.createQuery("select u from User u"
-                + " where u.username = :username and u.password = :password");
+        TypedQuery<User> query = em.createQuery("select u from User u"
+                + " where u.username = :username and u.password = :password", User.class);
         query.setParameter("username", user.getUsername());
         query.setParameter("password", user.getPassword());
         List<User> users = query.getResultList();

@@ -1,10 +1,10 @@
 package jsf2jpa.beans;
 
-import jsf2jpa.entity.Booking;
-
 import jakarta.inject.Named;
 
 import java.io.Serializable;
+
+import jsf2jpa.entity.Booking;
 
 /**
  *

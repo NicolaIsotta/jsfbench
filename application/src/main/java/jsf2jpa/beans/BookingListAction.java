@@ -1,21 +1,20 @@
 package jsf2jpa.beans;
 
-
-import jsf2jpa.entity.Booking;
-
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 
 import java.io.Serializable;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import jsf2jpa.entity.Booking;
 
 @Named("bookingList")
 @SessionScoped
@@ -35,8 +34,8 @@ public class BookingListAction implements Serializable {
     
     public void loadBookings(EntityManager em)
     {
-        Query query = em.createQuery("select b from Booking b"
-                + " where b.user.username = :username order by b.checkinDate");
+        TypedQuery<Booking> query = em.createQuery("select b from Booking b"
+                + " where b.user.username = :username order by b.checkinDate", Booking.class);
         query.setParameter("username", bookingSession.getUser().getUsername());
         bookings = query.getResultList();
     }    

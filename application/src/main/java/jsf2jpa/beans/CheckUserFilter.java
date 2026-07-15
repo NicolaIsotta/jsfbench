@@ -1,11 +1,6 @@
 package jsf2jpa.beans;
 
 import jakarta.faces.application.ResourceHandler;
-import jakarta.faces.component.UIViewRoot;
-import jakarta.faces.event.PhaseEvent;
-import jakarta.faces.event.PhaseId;
-import jakarta.faces.event.PhaseListener;
-import jakarta.faces.push.PushContext;
 import jakarta.inject.Inject;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -24,10 +19,10 @@ import java.util.Set;
  *
  * @author Leonardo Uribe
  */
-@WebFilter(servletNames = {"facesServlet"})
+@WebFilter(servletNames = {"Faces Servlet"})
 public class CheckUserFilter implements Filter {
 
-    public static final Set<String> PUBLIC_VIEWS = Set.of("/home.jsf", "/home.xhtml", "/register.xhtml", "/register.jsf");
+    public static final Set<String> PUBLIC_VIEWS = Set.of("/home.xhtml", "/register.xhtml");
 
     @Inject
     private BookingSession session;

@@ -131,7 +131,7 @@
           </collectionProp>
         </Arguments>
         <hashTree/>
-        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Simple Controller"/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Simple Controller" enabled="true"/>
         <hashTree>
           <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="logging book" enabled="true">
             <boolProp name="LoopController.continue_forever">true</boolProp>
@@ -144,7 +144,7 @@
             </GaussianRandomTimer>
             <hashTree/>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="get login" enabled="true">
-              <stringProp name="HTTPSampler.path">${context.path}/home.jsf</stringProp>
+              <stringProp name="HTTPSampler.path">${context.path}/home.xhtml</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
               <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
@@ -156,7 +156,7 @@
               <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                 <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                 <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;jakarta\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:jakarta\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
+                <stringProp name="RegexExtractor.regex">&lt;input[^&gt;]*name=&quot;jakarta\.faces\.ViewState&quot;[^&gt;]*value=&quot;([^&quot;]*)&quot;</stringProp>
                 <stringProp name="RegexExtractor.template">$1$</stringProp>
                 <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                 <stringProp name="RegexExtractor.match_number">1</stringProp>
@@ -165,7 +165,7 @@
               <hashTree/>
             </hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="post login" enabled="true">
-              <stringProp name="HTTPSampler.path">${context.path}/home.jsf</stringProp>
+              <stringProp name="HTTPSampler.path">${context.path}/home.xhtml</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -221,7 +221,7 @@
               <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                 <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                 <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;jakarta\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:jakarta\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
+                <stringProp name="RegexExtractor.regex">&lt;input[^&gt;]*name=&quot;jakarta\.faces\.ViewState&quot;[^&gt;]*value=&quot;([^&quot;]*)&quot;</stringProp>
                 <stringProp name="RegexExtractor.template">$1$</stringProp>
                 <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                 <stringProp name="RegexExtractor.match_number">1</stringProp>
@@ -251,7 +251,7 @@
               <hashTree>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="post search" enabled="true">
                   <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-                  <stringProp name="HTTPSampler.path">${context.path}/main.jsf</stringProp>
+                  <stringProp name="HTTPSampler.path">${context.path}/main.xhtml</stringProp>
                   <stringProp name="HTTPSampler.method">POST</stringProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                   <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
@@ -306,7 +306,7 @@
                   <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                     <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                     <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                    <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;jakarta\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:jakarta\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
+                    <stringProp name="RegexExtractor.regex">&lt;input[^&gt;]*name=&quot;jakarta\.faces\.ViewState&quot;[^&gt;]*value=&quot;([^&quot;]*)&quot;</stringProp>
                     <stringProp name="RegexExtractor.template">$1$</stringProp>
                     <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                     <stringProp name="RegexExtractor.match_number">1</stringProp>
@@ -322,7 +322,7 @@
               </IfController>
               <hashTree>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ajax post search" enabled="true">
-                  <stringProp name="HTTPSampler.path">${context.path}/main.jsf</stringProp>
+                  <stringProp name="HTTPSampler.path">${context.path}/main.xhtml</stringProp>
                   <stringProp name="HTTPSampler.method">POST</stringProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                   <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
@@ -419,7 +419,7 @@
                   <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                     <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                     <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                    <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;jakarta\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:jakarta\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
+                    <stringProp name="RegexExtractor.regex">&lt;input[^&gt;]*name=&quot;jakarta\.faces\.ViewState&quot;[^&gt;]*value=&quot;([^&quot;]*)&quot;</stringProp>
                     <stringProp name="RegexExtractor.template">$1$</stringProp>
                     <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                     <stringProp name="RegexExtractor.match_number">0</stringProp>
@@ -441,9 +441,9 @@
                   <hashTree/>
                 </hashTree>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="get view hotel">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="get view hotel" enabled="true">
                 <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-                <stringProp name="HTTPSampler.path">${context.path}/hotel.jsf</stringProp>
+                <stringProp name="HTTPSampler.path">${context.path}/hotel.xhtml</stringProp>
                 <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -464,7 +464,7 @@
                 <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                   <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                   <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                  <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;jakarta\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:jakarta\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
+                  <stringProp name="RegexExtractor.regex">&lt;input[^&gt;]*name=&quot;jakarta\.faces\.ViewState&quot;[^&gt;]*value=&quot;([^&quot;]*)&quot;</stringProp>
                   <stringProp name="RegexExtractor.template">$1$</stringProp>
                   <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                   <stringProp name="RegexExtractor.match_number">0</stringProp>
@@ -472,9 +472,9 @@
                 </RegexExtractor>
                 <hashTree/>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="post book hotel">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="post book hotel" enabled="true">
                 <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-                <stringProp name="HTTPSampler.path">${context.path}/hotel.jsf</stringProp>
+                <stringProp name="HTTPSampler.path">${context.path}/hotel.xhtml</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -530,7 +530,7 @@
                 <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                   <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                   <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                  <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;jakarta\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:jakarta\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
+                  <stringProp name="RegexExtractor.regex">&lt;input[^&gt;]*name=&quot;jakarta\.faces\.ViewState&quot;[^&gt;]*value=&quot;([^&quot;]*)&quot;</stringProp>
                   <stringProp name="RegexExtractor.template">$1$</stringProp>
                   <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                   <stringProp name="RegexExtractor.match_number">0</stringProp>
@@ -546,7 +546,7 @@
               <hashTree>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ajax post cc number" enabled="true">
                   <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-                  <stringProp name="HTTPSampler.path">${context.path}/book.jsf</stringProp>
+                  <stringProp name="HTTPSampler.path">${context.path}/book.xhtml</stringProp>
                   <stringProp name="HTTPSampler.method">POST</stringProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                   <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
@@ -622,7 +622,7 @@
                   <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                     <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                     <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                    <stringProp name="RegexExtractor.regex">&lt;update id=&quot;j_id[_v10]*:jakarta\.faces\.ViewState:[0-9]&quot;&gt;&lt;!\[CDATA\[(.+?)\]\]&gt;&lt;\/update&gt;</stringProp>
+                    <stringProp name="RegexExtractor.regex">&lt;update id=&quot;[^&quot;]*ViewState[^&quot;]*&quot;&gt;&lt;!\[CDATA\[(.+?)\]\]&gt;&lt;\/update&gt;</stringProp>
                     <stringProp name="RegexExtractor.template">$1$</stringProp>
                     <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                     <stringProp name="RegexExtractor.match_number">1</stringProp>
@@ -645,7 +645,7 @@
                 </hashTree>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ajax post cc name" enabled="true">
                   <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-                  <stringProp name="HTTPSampler.path">${context.path}/book.jsf</stringProp>
+                  <stringProp name="HTTPSampler.path">${context.path}/book.xhtml</stringProp>
                   <stringProp name="HTTPSampler.method">POST</stringProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                   <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
@@ -721,7 +721,7 @@
                   <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                     <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                     <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                    <stringProp name="RegexExtractor.regex">&lt;update id=&quot;j_id[_v10]*:jakarta\.faces\.ViewState:[0-9]&quot;&gt;&lt;!\[CDATA\[(.+?)\]\]&gt;&lt;\/update&gt;</stringProp>
+                    <stringProp name="RegexExtractor.regex">&lt;update id=&quot;[^&quot;]*ViewState[^&quot;]*&quot;&gt;&lt;!\[CDATA\[(.+?)\]\]&gt;&lt;\/update&gt;</stringProp>
                     <stringProp name="RegexExtractor.template">$1$</stringProp>
                     <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                     <stringProp name="RegexExtractor.match_number">1</stringProp>
@@ -743,9 +743,9 @@
                   <hashTree/>
                 </hashTree>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="post booking details">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="post booking details" enabled="true">
                 <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-                <stringProp name="HTTPSampler.path">${context.path}/book.jsf</stringProp>
+                <stringProp name="HTTPSampler.path">${context.path}/book.xhtml</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -843,7 +843,7 @@
                 <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                   <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                   <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                  <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;jakarta\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:jakarta\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
+                  <stringProp name="RegexExtractor.regex">&lt;input[^&gt;]*name=&quot;jakarta\.faces\.ViewState&quot;[^&gt;]*value=&quot;([^&quot;]*)&quot;</stringProp>
                   <stringProp name="RegexExtractor.template">$1$</stringProp>
                   <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                   <stringProp name="RegexExtractor.match_number">1</stringProp>
@@ -853,7 +853,7 @@
               </hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="post confirm booking" enabled="true">
                 <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-                <stringProp name="HTTPSampler.path">${context.path}/confirm.jsf</stringProp>
+                <stringProp name="HTTPSampler.path">${context.path}/confirm.xhtml</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -895,7 +895,7 @@
                 <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                   <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                   <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                  <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;jakarta\.faces\.ViewState&quot; id=&quot;j_id[_v10]*:jakarta\.faces\.ViewState:[0-9]&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; \/&gt;</stringProp>
+                  <stringProp name="RegexExtractor.regex">&lt;input[^&gt;]*name=&quot;jakarta\.faces\.ViewState&quot;[^&gt;]*value=&quot;([^&quot;]*)&quot;</stringProp>
                   <stringProp name="RegexExtractor.template">$1$</stringProp>
                   <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                   <stringProp name="RegexExtractor.match_number">1</stringProp>
@@ -920,7 +920,7 @@
               </IfController>
               <hashTree>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="cancel booking" enabled="true">
-                  <stringProp name="HTTPSampler.path">${context.path}/main.jsf</stringProp>
+                  <stringProp name="HTTPSampler.path">${context.path}/main.xhtml</stringProp>
                   <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                   <stringProp name="HTTPSampler.method">POST</stringProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -969,7 +969,7 @@
                   <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                     <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                     <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                    <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;jakarta\.faces\.ViewState&quot; id=&quot;j_id__v_0:jakarta\.faces\.ViewState:1&quot; value=&quot;(.+?)&quot; autocomplete=&quot;off&quot; /&gt;</stringProp>
+                    <stringProp name="RegexExtractor.regex">&lt;input[^&gt;]*name=&quot;jakarta\.faces\.ViewState&quot;[^&gt;]*value=&quot;([^&quot;]*)&quot;</stringProp>
                     <stringProp name="RegexExtractor.template">$1$</stringProp>
                     <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                     <stringProp name="RegexExtractor.match_number">1</stringProp>
@@ -986,7 +986,7 @@
             </IfController>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="get logout" enabled="true">
-                <stringProp name="HTTPSampler.path">${context.path}/process.jsf</stringProp>
+                <stringProp name="HTTPSampler.path">${context.path}/process.xhtml</stringProp>
                 <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -1044,7 +1044,7 @@
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="StatGraphVisualizer" testclass="ResultCollector" testname="Aggregate Graph">
+        <ResultCollector guiclass="StatGraphVisualizer" testclass="ResultCollector" testname="Aggregate Graph" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>

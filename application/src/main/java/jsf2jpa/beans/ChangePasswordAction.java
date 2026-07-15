@@ -1,13 +1,13 @@
 package jsf2jpa.beans;
 
-import jsf2jpa.entity.User;
-
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+
+import jsf2jpa.entity.User;
 
 @Named("changePassword")
 @RequestScoped

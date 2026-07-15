@@ -1,8 +1,6 @@
 package jsf2jpa.beans;
 
 
-import jsf2jpa.entity.User;
-
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
@@ -10,6 +8,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 
 import java.util.List;
+
+import jsf2jpa.entity.User;
 
 @Named("register")
 @jakarta.enterprise.context.RequestScoped
