@@ -1,13 +1,11 @@
-package jsf2jpa.beans;
+package jsfbench.beans;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
-import jsf2jpa.entity.User;
+import jsfbench.entity.User;
 
 @Named("changePassword")
 @RequestScoped
@@ -15,28 +13,24 @@ public class ChangePasswordAction extends SimpleAction {
 
     private User user;
 
-    @Inject
-    private BookingSession bookingSession;
-    
     @PostConstruct
     public void init()
     {
-        user = bookingSession.getUser();
-    }
-    
-    public User getUser()
-    {
+        user = session.getUser();
         if (user == null)
         {
             user = new User();
         }
+    }
+    
+    public User getUser()
+    {
         return user;
     }    
     
     private String verify;
 
     public String changePassword() {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
         if (user.getPassword().equals(verify))
         {
             try
@@ -52,11 +46,13 @@ public class ChangePasswordAction extends SimpleAction {
                 {
                     getEntityManager().getTransaction().rollback();
                 }
+                return null;
             }
             facesContext.addMessage(null, new FacesMessage("Password updated"));
-            return "main";
+            facesContext.getExternalContext().getFlash().setKeepMessages(true);
+            return "main?faces-redirect=true";
         } else {
-            facesContext.addMessage("register:verify", new FacesMessage("Re-enter new password"));
+            facesContext.addMessage("setpassword:verify", new FacesMessage("Re-enter new password"));
             revertUser();
             verify = null;
             return null;
@@ -65,6 +61,7 @@ public class ChangePasswordAction extends SimpleAction {
 
     private void revertUser() {
         user = getEntityManager().find(User.class, user.getUsername());
+        session.setUser(user);
     }
 
     public String getVerify() {

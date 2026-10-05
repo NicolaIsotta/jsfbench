@@ -1,9 +1,8 @@
-package jsf2jpa.beans;
+package jsfbench.beans;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -14,29 +13,27 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import jsf2jpa.entity.Booking;
+import jsfbench.entity.Booking;
 
 @Named("bookingList")
 @SessionScoped
-public class BookingListAction implements Serializable {
+public class BookingListAction extends SimpleAction implements Serializable {
 
-    protected static final Logger log = LogManager.getLogger(HotelBookingAction.class);        
-    
-    @Inject
-    private BookingSession bookingSession;
+    protected static final Logger log = LogManager.getLogger(HotelBookingAction.class);
 
     private List<Booking> bookings;
 
-    public void loadBookings()
+    @PostConstruct
+    public void init()
     {
         loadBookings(getEntityManager());
     }
-    
+
     public void loadBookings(EntityManager em)
     {
         TypedQuery<Booking> query = em.createQuery("select b from Booking b"
                 + " where b.user.username = :username order by b.checkinDate", Booking.class);
-        query.setParameter("username", bookingSession.getUser().getUsername());
+        query.setParameter("username", session.getUser().getUsername());
         bookings = query.getResultList();
     }    
 
@@ -55,31 +52,16 @@ public class BookingListAction implements Serializable {
             em.getTransaction().begin();
             em.remove(cancelled);
             em.getTransaction().commit();
+            facesContext.addMessage(null, new FacesMessage("Booking cancelled for confirmation number " + cancelled.getId()));
         }
         loadBookings(em);
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        facesContext.addMessage(null, new FacesMessage("Booking cancelled for confirmation number "+cancelled.getId()));
     }
 
     /**
      * @return the bookings
      */
     public List<Booking> getBookings() {
-        if (bookings == null)
-        {
-            loadBookings();
-        }
         return bookings;
-    }
-
-    /**
-     * @return the hotelSearchAction
-     */
-    EntityManager getEntityManager()
-    {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        return facesContext.getApplication().evaluateExpressionGet(
-                facesContext, "#{jpaRequestCycle}", JpaRequestCycle.class).getEntityManager();
     }
     
     public boolean isPageEmpty()

@@ -42,7 +42,7 @@ Test configuration:
 
 ## How to run it? 
 
-Requires Java >= 11 and Maven to build the project.
+Requires Java >= 17 and Maven to build the project.
 
 ### Configure Tomcat
 1) download Tomcat 10.1.X
@@ -50,15 +50,15 @@ Requires Java >= 11 and Maven to build the project.
 3) copy the server.xml file from ./tomcat/conf to all 2 instances, which disables autoDeployment and accessLogValve
 
 ### Build the application
-1) go the ./application
-2) mvn clean package -Pmyfaces, copy the generated war and extract it to ./tomcat-myfaces/webapps/jsfbench
-4) mvn clean package -Pmojarra, copy the generated war and extract it to ./tomcat-mojarra/webapps/jsfbench
+1) go to ./application
+2) `mvn clean package -Pmyfaces`, copy the generated war and extract it to ./tomcat-myfaces/webapps/jsfbench
+3) `mvn clean package -Pmojarra`, copy the generated war and extract it to ./tomcat-mojarra/webapps/jsfbench
 
 ### Run via JMeter
 1) download JMeter 5.6+
 2) Increase MaxUserPort if you are on Windows: https://deploymentresearch.com/research/post/532/fix-for-windows-10-exhausted-pool-of-tcp-ip-ports
 3) run one of the tomcats (e.g. `./tomcat-myfaces/bin/startup.bat`)
 4) run jmeter via command line (e.g. `jmeter -n -t application.jmx -l results.jtl -e -o report-output`)
-6) run it once for a warmup
-7) clean the results
-8) run again and see the results under /report-output/index.html
+5) run it once for a warmup
+6) clean the results
+7) run again and see the results under /report-output/index.html

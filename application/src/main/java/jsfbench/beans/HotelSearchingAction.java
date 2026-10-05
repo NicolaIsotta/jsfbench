@@ -1,19 +1,15 @@
-package jsf2jpa.beans;
+package jsfbench.beans;
 
-import jakarta.faces.event.ActionEvent;
 import jakarta.faces.event.AjaxBehaviorEvent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.TypedQuery;
 
-import java.io.Serializable;
-
-import jsf2jpa.entity.Hotel;
-
+import jsfbench.entity.Hotel;
 
 @Named("hotelSearch")
 @jakarta.enterprise.context.RequestScoped
-public class HotelSearchingAction extends SimpleAction implements Serializable
+public class HotelSearchingAction extends SimpleAction
 {
 
     @Inject
@@ -21,14 +17,7 @@ public class HotelSearchingAction extends SimpleAction implements Serializable
 
     public void find(AjaxBehaviorEvent event)
     {
-        getHotelBean().setPage(0);
-        queryHotels();
-    }
-    
-    public void find(ActionEvent event)
-    {
-        getHotelBean().setPage(0);
-        queryHotels();
+        find();
     }
 
     public void find()
@@ -67,7 +56,7 @@ public class HotelSearchingAction extends SimpleAction implements Serializable
     }
 
     public void setSearchString(String searchString) {
-        this.getHotelBean().getSearchString();
+        this.getHotelBean().setSearchString(searchString);
     }
 
     /**

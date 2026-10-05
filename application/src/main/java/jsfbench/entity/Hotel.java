@@ -1,4 +1,4 @@
-package jsf2jpa.entity;
+package jsfbench.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

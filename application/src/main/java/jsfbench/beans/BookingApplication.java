@@ -1,4 +1,4 @@
-package jsf2jpa.beans;
+package jsfbench.beans;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
@@ -22,12 +22,29 @@ public class BookingApplication {
 
     @PostConstruct
     public void init() {
+        months = new SelectItem[12];
+        months[0] = new SelectItem(1, "Jan");
+        months[1] = new SelectItem(2, "Feb");
+        months[2] = new SelectItem(3, "Mar");
+        months[3] = new SelectItem(4, "Apr");
+        months[4] = new SelectItem(5, "May");
+        months[5] = new SelectItem(6, "Jun");
+        months[6] = new SelectItem(7, "Jul");
+        months[7] = new SelectItem(8, "Aug");
+        months[8] = new SelectItem(9, "Sep");
+        months[9] = new SelectItem(10, "Oct");
+        months[10] = new SelectItem(11, "Nov");
+        months[11] = new SelectItem(12, "Dec");
+
+        int startingYear = 2026;
+        years = new SelectItem[10];
+        for (int i = 0; i < years.length; i++) {
+            years[i] = new SelectItem(startingYear + i);
+        }
+        
         emf = Persistence.createEntityManagerFactory("bookingDatabase");
-        getMonths();
-        getYears();
 
         EntityManager em = emf.createEntityManager();
-
  
         insert(em, "insert into Customer (username, password, name) values ('gavin', 'foobar', 'Gavin King')");
         insert(em, "insert into Customer (username, password, name) values ('demo', 'demo', 'Demo User')");
@@ -65,33 +82,10 @@ public class BookingApplication {
     }
     
     public SelectItem[] getMonths() {
-        if (months == null) {
-            months = new SelectItem[12];
-            months[0] = new SelectItem(1, "Jan");
-            months[1] = new SelectItem(2, "Feb");
-            months[2] = new SelectItem(3, "Mar");
-            months[3] = new SelectItem(4, "Apr");
-            months[4] = new SelectItem(5, "May");
-            months[5] = new SelectItem(6, "Jun");
-            months[6] = new SelectItem(7, "Jul");
-            months[7] = new SelectItem(8, "Aug");
-            months[8] = new SelectItem(9, "Sep");
-            months[9] = new SelectItem(10, "Oct");
-            months[10] = new SelectItem(11, "Nov");
-            months[11] = new SelectItem(12, "Dec");
-        }
         return months;
     }
 
     public SelectItem[] getYears() {
-        if (years == null) {
-            years = new SelectItem[5];
-            years[0] = new SelectItem(2006, "2006");
-            years[1] = new SelectItem(2007, "2007");
-            years[2] = new SelectItem(2008, "2008");
-            years[3] = new SelectItem(2009, "2009");
-            years[4] = new SelectItem(2010, "2010");
-        }
         return years;
     }
 

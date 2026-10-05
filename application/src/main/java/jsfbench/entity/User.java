@@ -1,4 +1,4 @@
-package jsf2jpa.entity;
+package jsfbench.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -8,7 +8,6 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
-
 
 @Entity
 @Table(name = "Customer")

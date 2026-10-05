@@ -1,0 +1,23 @@
+<ui:component xmlns:cc="jakarta.faces.composite"
+              xmlns:ui="jakarta.faces.facelets"
+              xmlns:h="jakarta.faces.html"
+              xmlns:f="jakarta.faces.core">
+
+    <!-- INTERFACE -->
+    <cc:interface componentType="inputYearMonth">
+        <cc:attribute name="value" type="java.time.YearMonth"
+                      shortDescription="The selected Year + Month. Defaults to current." />
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <span id="#{cc.clientId}">
+            <h:selectOneMenu id="month" binding="#{cc.month}" converter="jakarta.faces.Integer">
+                <f:selectItems value="#{bookingApplication.months}" />
+            </h:selectOneMenu>
+            <h:selectOneMenu id="year" binding="#{cc.year}" converter="jakarta.faces.Integer">
+                <f:selectItems value="#{bookingApplication.years}" />
+            </h:selectOneMenu>
+        </span>
+    </cc:implementation>
+
+</ui:component>

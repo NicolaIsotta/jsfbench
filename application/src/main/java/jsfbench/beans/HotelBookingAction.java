@@ -1,41 +1,44 @@
-package jsf2jpa.beans;
+package jsfbench.beans;
 
 import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
+import jakarta.faces.context.Flash;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 
-import java.util.Calendar;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import jsf2jpa.entity.Booking;
-import jsf2jpa.entity.Hotel;
-
+import jsfbench.entity.Booking;
+import jsfbench.entity.Hotel;
 
 @Named("hotelBooking")
-@jakarta.enterprise.context.RequestScoped
-public class HotelBookingAction extends SimpleAction {
+@ViewScoped
+public class HotelBookingAction extends SimpleAction implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     protected static final Logger log = LogManager.getLogger(HotelBookingAction.class);        
-    
-    @Inject
-    private BookingSession bookingSession;
     
     @Inject
     private BookingBean bookingBean;
     
     @Inject
     private BookingListAction bookingListAction;
-    
+
+    @Inject
+    private Flash flash;
+
     private Hotel hotel;
-    
+
     private Long hotelId;
 
     private boolean bookingValid;
-    
+
     public String selectHotel()
     {
         if (getHotelId() != null)
@@ -44,7 +47,7 @@ public class HotelBookingAction extends SimpleAction {
         }
         if (getHotel() == null)
         {
-            return "main";
+            return "main?faces-redirect=true";
         }
         return null;
     }
@@ -53,41 +56,26 @@ public class HotelBookingAction extends SimpleAction {
     {
         if (hotelId != null)
         {
-            try
-            {
-                hotel = getEntityManager().find(Hotel.class, hotelId);
-                Booking booking = new Booking(getHotel(), getBookingSession().getUser());
-                Calendar calendar = Calendar.getInstance();
-                booking.setCheckinDate(calendar.getTime());
-                calendar.add(Calendar.DAY_OF_MONTH, 1);
-                booking.setCheckoutDate(calendar.getTime());
-                getBookingBean().setBooking(booking);
-                return "book";
-            }
-            catch (NumberFormatException e)
-            {
-                //Skip
-            }
+            hotel = getEntityManager().find(Hotel.class, hotelId);
+            Booking booking = new Booking(getHotel(), session.getUser());
+            booking.setCheckinDate(LocalDate.now());
+            booking.setCheckoutDate(LocalDate.now().plusDays(1));
+            getBookingBean().setBooking(booking);
+            return "book?faces-redirect=true";
         }
         return null;
     }
 
     public String setBookingDetails() {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, -1);
-        if (getBookingBean().getBooking().getCheckinDate().before(calendar.getTime())) {
-            facesContext.addMessage("checkinDate", new FacesMessage("Check in date must be a future date"));
-            bookingValid = false;
-        } else if (!bookingBean.getBooking().getCheckinDate().before(bookingBean.getBooking().getCheckoutDate())) {
-            facesContext.addMessage("checkoutDate", new FacesMessage("Check out date must be later than check in date"));
+        if (!bookingBean.getBooking().getCheckinDate().isBefore(bookingBean.getBooking().getCheckoutDate())) {
+            facesContext.addMessage(null, new FacesMessage("Check out date must be later than check in date"));
             bookingValid = false;
         } else {
             bookingValid = true;
         }
         if (bookingValid)
         {
-            return "confirm";
+            return "confirm?faces-redirect=true";
         }
         else
         {
@@ -101,7 +89,6 @@ public class HotelBookingAction extends SimpleAction {
 
     public String confirm()
     {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
         Booking booking = getBookingBean().getBooking();
         EntityManager em = getEntityManager();
         try
@@ -125,13 +112,14 @@ public class HotelBookingAction extends SimpleAction {
         {
             log.info("New booking: "+booking.getId()+" for "+booking.getUser().getUsername());
         }
-        return "main";
+        flash.setKeepMessages(true);
+        return "main?faces-redirect=true";
     }
 
     public String cancel()
     {
         getBookingBean().setBooking(null);
-        return "main";
+        return "main?faces-redirect=true";
     }
 
     /**
@@ -153,20 +141,6 @@ public class HotelBookingAction extends SimpleAction {
      */
     public Hotel getHotel() {
         return hotel;
-    }
-
-    /**
-     * @return the bookingSession
-     */
-    public BookingSession getBookingSession() {
-        return bookingSession;
-    }
-
-    /**
-     * @param bookingSession the bookingSession to set
-     */
-    public void setBookingSession(BookingSession bookingSession) {
-        this.bookingSession = bookingSession;
     }
 
     /**

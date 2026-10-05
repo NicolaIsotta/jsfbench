@@ -1,18 +1,18 @@
-package jsf2jpa.beans;
+package jsfbench.beans;
 
 import jakarta.inject.Named;
 
 import java.io.Serializable;
 import java.util.List;
 
-import jsf2jpa.entity.Hotel;
+import jsfbench.entity.Hotel;
 
 /**
  *
  * @author lu4242
  */
 @Named("hotelBean")
-@jakarta.enterprise.context.SessionScoped
+@jakarta.faces.view.ViewScoped
 public class HotelBean implements Serializable
 {
     private String searchString;

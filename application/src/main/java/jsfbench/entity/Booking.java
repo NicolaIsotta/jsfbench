@@ -1,20 +1,23 @@
-package jsf2jpa.entity;
+package jsfbench.entity;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.time.temporal.ChronoUnit;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 
@@ -24,12 +27,11 @@ public class Booking implements Serializable {
     private Long id;
     private User user;
     private Hotel hotel;
-    private Date checkinDate;
-    private Date checkoutDate;
+    private LocalDate checkinDate;
+    private LocalDate checkoutDate;
     private String creditCard;
     private String creditCardName;
-    private int creditCardExpiryMonth;
-    private int creditCardExpiryYear;
+    private YearMonth creditCardExpiry;
     private boolean smoking;
     private int beds;
 
@@ -47,7 +49,7 @@ public class Booking implements Serializable {
 
     @Transient
     public int getNights() {
-        return (int) (checkoutDate.getTime() - checkinDate.getTime()) / 1000 / 60 / 60 / 24;
+        return (int) ChronoUnit.DAYS.between(checkinDate, checkoutDate);
     }
 
     @Id
@@ -60,14 +62,14 @@ public class Booking implements Serializable {
         this.id = id;
     }
 
+    @FutureOrPresent
     @NotNull
     @Basic
-    @Temporal(TemporalType.DATE)
-    public Date getCheckinDate() {
+    public LocalDate getCheckinDate() {
         return checkinDate;
     }
 
-    public void setCheckinDate(Date datetime) {
+    public void setCheckinDate(LocalDate datetime) {
         this.checkinDate = datetime;
     }
 
@@ -92,13 +94,13 @@ public class Booking implements Serializable {
     }
 
     @Basic
-    @Temporal(TemporalType.DATE)
+    @Future
     @NotNull
-    public Date getCheckoutDate() {
+    public LocalDate getCheckoutDate() {
         return checkoutDate;
     }
 
-    public void setCheckoutDate(Date checkoutDate) {
+    public void setCheckoutDate(LocalDate checkoutDate) {
         this.checkoutDate = checkoutDate;
     }
 
@@ -114,7 +116,7 @@ public class Booking implements Serializable {
 
     @Transient
     public String getDescription() {
-        DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
+        DateTimeFormatter df = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
         return hotel == null ? null : hotel.getName() +
                 ", " + df.format(getCheckinDate()) +
                 " to " + df.format(getCheckoutDate());
@@ -146,20 +148,12 @@ public class Booking implements Serializable {
         this.creditCardName = creditCardName;
     }
 
-    public int getCreditCardExpiryMonth() {
-        return creditCardExpiryMonth;
+    public YearMonth getCreditCardExpiry() {
+        return creditCardExpiry;
     }
 
-    public void setCreditCardExpiryMonth(int creditCardExpiryMonth) {
-        this.creditCardExpiryMonth = creditCardExpiryMonth;
-    }
-
-    public int getCreditCardExpiryYear() {
-        return creditCardExpiryYear;
-    }
-
-    public void setCreditCardExpiryYear(int creditCardExpiryYear) {
-        this.creditCardExpiryYear = creditCardExpiryYear;
+    public void setCreditCardExpiry(YearMonth creditCardExpiry) {
+        this.creditCardExpiry = creditCardExpiry;
     }
 
     @Override

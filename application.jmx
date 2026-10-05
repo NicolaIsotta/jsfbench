@@ -86,7 +86,7 @@
         </CounterConfig>
         <hashTree/>
         <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.domain">${context.host}</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
@@ -419,7 +419,7 @@
                   <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex viewState" enabled="true">
                     <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                     <stringProp name="RegexExtractor.refname">viewState</stringProp>
-                    <stringProp name="RegexExtractor.regex">&lt;input[^&gt;]*name=&quot;jakarta\.faces\.ViewState&quot;[^&gt;]*value=&quot;([^&quot;]*)&quot;</stringProp>
+                    <stringProp name="RegexExtractor.regex">&lt;update id=&quot;[^&quot;]*ViewState[^&quot;]*&quot;&gt;&lt;!\[CDATA\[(.+?)\]\]&gt;&lt;\/update&gt;</stringProp>
                     <stringProp name="RegexExtractor.template">$1$</stringProp>
                     <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                     <stringProp name="RegexExtractor.match_number">0</stringProp>
@@ -502,26 +502,12 @@
                       <boolProp name="HTTPArgument.use_equals">true</boolProp>
                       <stringProp name="Argument.name">hotel:bookHotel</stringProp>
                     </elementProp>
-                    <elementProp name="hotel:_idcl" elementType="HTTPArgument">
-                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">hotel:bookHotel</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                      <stringProp name="Argument.name">hotel:_idcl</stringProp>
-                    </elementProp>
                     <elementProp name="hotel_SUBMIT" elementType="HTTPArgument">
                       <boolProp name="HTTPArgument.always_encode">false</boolProp>
                       <stringProp name="Argument.value">1</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
                       <boolProp name="HTTPArgument.use_equals">true</boolProp>
                       <stringProp name="Argument.name">hotel_SUBMIT</stringProp>
-                    </elementProp>
-                    <elementProp name="hotel:hiddenId" elementType="HTTPArgument">
-                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">1</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                      <stringProp name="Argument.name">hotel:hiddenId</stringProp>
                     </elementProp>
                   </collectionProp>
                 </elementProp>
@@ -806,14 +792,14 @@
                       <stringProp name="Argument.value">12</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
                       <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                      <stringProp name="Argument.name">booking:creditCardExpiryMonth</stringProp>
+                      <stringProp name="Argument.name">booking:creditCardExpiry:month</stringProp>
                     </elementProp>
                     <elementProp name="booking:creditCardExpiryYear" elementType="HTTPArgument">
                       <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">2010</stringProp>
+                      <stringProp name="Argument.value">2030</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
                       <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                      <stringProp name="Argument.name">booking:creditCardExpiryYear</stringProp>
+                      <stringProp name="Argument.name">booking:creditCardExpiry:year</stringProp>
                     </elementProp>
                     <elementProp name="jakarta.faces.ViewState" elementType="HTTPArgument">
                       <boolProp name="HTTPArgument.always_encode">true</boolProp>
@@ -905,7 +891,7 @@
                 <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="regex cancel" enabled="true">
                   <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                   <stringProp name="RegexExtractor.refname">cancelId</stringProp>
-                  <stringProp name="RegexExtractor.regex">bookings:bookings:([0-9]+):cancel</stringProp>
+                  <stringProp name="RegexExtractor.regex">bookings:bookingsTable:([0-9]+):cancel</stringProp>
                   <stringProp name="RegexExtractor.template">$1$</stringProp>
                   <stringProp name="RegexExtractor.default">REGEX_FAILED</stringProp>
                   <stringProp name="RegexExtractor.match_number">1</stringProp>
@@ -943,7 +929,7 @@
                       </elementProp>
                       <elementProp name="bookings:_idcl" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                        <stringProp name="Argument.value">bookings:bookings:${cancelId}:cancel</stringProp>
+                        <stringProp name="Argument.value">bookings:bookingsTable:${cancelId}:cancel</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
                         <stringProp name="Argument.name">bookings:_idcl</stringProp>
@@ -955,12 +941,12 @@
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
                         <stringProp name="Argument.name">bookings</stringProp>
                       </elementProp>
-                      <elementProp name="bookings:bookings:${cancelId}:cancel" elementType="HTTPArgument">
+                      <elementProp name="bookings:bookingsTable:${cancelId}:cancel" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                        <stringProp name="Argument.value">bookings:bookings:${cancelId}:cancel</stringProp>
+                        <stringProp name="Argument.value">bookings:bookingsTable:${cancelId}:cancel</stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                         <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                        <stringProp name="Argument.name">bookings:bookings:${cancelId}:cancel</stringProp>
+                        <stringProp name="Argument.name">bookings:bookingsTable:${cancelId}:cancel</stringProp>
                       </elementProp>
                     </collectionProp>
                   </elementProp>
@@ -985,20 +971,48 @@
               <boolProp name="IfController.useExpression">false</boolProp>
             </IfController>
             <hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="get logout" enabled="true">
-                <stringProp name="HTTPSampler.path">${context.path}/process.xhtml</stringProp>
-                <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
-                <stringProp name="HTTPSampler.method">GET</stringProp>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="post logout" enabled="true">
+                <stringProp name="HTTPSampler.path">${context.path}/main.xhtml</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
                   <collectionProp name="Arguments.arguments">
-                    <elementProp name="action" elementType="HTTPArgument">
-                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">logout</stringProp>
+                    <elementProp name="jakarta.faces.ViewState" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                      <stringProp name="Argument.value">${viewState}</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
                       <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                      <stringProp name="Argument.name">action</stringProp>
+                      <stringProp name="Argument.name">jakarta.faces.ViewState</stringProp>
+                    </elementProp>
+                    <elementProp name="logoutForm_SUBMIT" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">1</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">logoutForm_SUBMIT</stringProp>
+                    </elementProp>
+                    <elementProp name="logoutForm:_idcl" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">logoutForm:logout</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">logoutForm:_idcl</stringProp>
+                    </elementProp>
+                    <elementProp name="logoutForm" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">logoutForm</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">logoutForm</stringProp>
+                    </elementProp>
+                    <elementProp name="logoutForm:logout" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">logoutForm:logout</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">logoutForm:logout</stringProp>
                     </elementProp>
                   </collectionProp>
                 </elementProp>

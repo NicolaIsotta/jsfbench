@@ -1,4 +1,4 @@
-package jsf2jpa.beans;
+package jsfbench.beans;
 
 import jakarta.faces.application.ResourceHandler;
 import jakarta.inject.Inject;

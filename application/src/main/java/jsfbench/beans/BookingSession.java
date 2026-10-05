@@ -1,17 +1,21 @@
-package jsf2jpa.beans;
+package jsfbench.beans;
 
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
 
-import jsf2jpa.entity.User;
+import jsfbench.entity.User;
 
 @Named("bookingSession")
 @jakarta.enterprise.context.SessionScoped
 public class BookingSession implements Serializable
-{    
+{
+    @Inject
+    private FacesContext facesContext;
+
     private User user;
     
     public User getUser()
@@ -26,7 +30,6 @@ public class BookingSession implements Serializable
 
     public void info(String message)
     {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_INFO,
                         message, message ));
@@ -34,8 +37,7 @@ public class BookingSession implements Serializable
     
     public String logout()
     {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.getExternalContext().invalidateSession();
-        return "home";
+        return "home?faces-redirect=true";
     }
 }

@@ -1,28 +1,29 @@
-package jsf2jpa.beans;
+package jsfbench.beans;
 
-
+import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 
 import java.util.List;
 
-import jsf2jpa.entity.User;
+import jsfbench.entity.User;
 
 @Named("register")
 @jakarta.enterprise.context.RequestScoped
 public class RegisterAction extends SimpleAction
 {
     private User user;
+
+    @PostConstruct
+    public void init()
+    {
+        user = new User();
+    }
     
     public User getUser()
     {
-        if (user == null)
-        {
-            user = new User();
-        }
         return user;
     }
 
@@ -30,7 +31,6 @@ public class RegisterAction extends SimpleAction
 
     public String register()
     {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
         if (getUser().getPassword().equals(verify))
         {
             EntityManager em = getEntityManager();
@@ -52,9 +52,11 @@ public class RegisterAction extends SimpleAction
                     {
                         em.getTransaction().rollback();
                     }
+                    return null;
                 }
                 facesContext.addMessage(null, new FacesMessage("Successfully registered as "+user.getUsername()));
-                return "home";
+                facesContext.getExternalContext().getFlash().setKeepMessages(true);
+                return "home?faces-redirect=true";
             }
             else
             {

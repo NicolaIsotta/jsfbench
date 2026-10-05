@@ -1,22 +1,21 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="jakarta.faces.facelets"
+<html xmlns:ui="jakarta.faces.facelets"
       xmlns:h="jakarta.faces.html"
       xmlns:f="jakarta.faces.core">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>JBoss Suites: Seam Framework</title>
-        <link href="css/screen.css" rel="stylesheet" type="text/css" />
+        <h:outputStylesheet name="css/screen.css"/>
     </h:head>
     <h:body>
         <div id="document">
             <div id="header">
-                <div id="title"><img src="img/hdr.title.gif" alt="JBoss Suites: seam framework demo"/></div>
+                <div id="title"><h:graphicImage name="img/hdr.title.gif" alt="JBoss Suites: seam framework demo"/></div>
                 <div id="status">
-                    Welcome #{user.name}
+                    Welcome #{bookingSession.user.name}
                     | <h:link id="search" outcome="main" value="Search"/>
                     | <h:link id="settings" outcome="password" value="Settings"/>
-                    | <h:link id="logout" outcome="process" value="Logout"><f:param name="action" value="logout"/></h:link>
+                    | <h:form id="logoutForm"><h:commandLink id="logout" action="#{bookingSession.logout()}" value="Logout"/></h:form>
                 </div>
             </div>
             <div id="container">
