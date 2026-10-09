@@ -40,14 +40,28 @@ Test configuration:
 - OpenJDK Runtime Environment Zulu25.34+17-CA (build 25.0.3+9-LTS)
 - Tomcat 10.1.56
 
+### 2026-10-09
+
+|            | Average     | Median      | 90th pct    | 95th pct    | 99th pct    | Throughput |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Mojarra 4.1.16  |      0.89ms |      1.00ms |      1.00ms |      2.00ms |      2.00ms |    6394.15 |
+| MyFaces 4.1.4   |      0.77ms |      1.00ms |      1.00ms |      1.00ms |      2.00ms |    6688.43 |
+
+Test configuration:
+- AMD Ryzen 7 8845HS w/ Radeon 780M Graphics 3.80 GHz
+- 32 GB DDR5 6400 MHz
+- Windows 11 Home 26300.9457
+- OpenJDK Runtime Environment Zulu25.36+205-CA (build 25.0.4.1+1-LTS)
+- Tomcat 11.0.26
+
 ## How to run it? 
 
 Requires Java >= 17 and Maven to build the project.
 
 ### Configure Tomcat
-1) download Tomcat 10.1.X
+1) download Tomcat 11.0.X
 2) extract it 2 times (tomcat-myfaces, tomcat-mojarra)
-3) copy the server.xml file from ./tomcat/conf to all 2 instances, which disables autoDeployment and accessLogValve
+3) copy the server.xml file from ./tomcat/conf to all 2 instances, to disable autoDeployment and accessLogValve
 
 ### Build the application
 1) go to ./application
@@ -58,7 +72,7 @@ Requires Java >= 17 and Maven to build the project.
 1) download JMeter 5.6+
 2) Increase MaxUserPort if you are on Windows: https://deploymentresearch.com/research/post/532/fix-for-windows-10-exhausted-pool-of-tcp-ip-ports
 3) run one of the tomcats (e.g. `./tomcat-myfaces/bin/startup.bat`)
-4) run jmeter via command line (e.g. `jmeter -n -t application.jmx -l results.jtl -e -o report-output`)
+4) run jmeter via command line (e.g. `.\jmeter -n -t application.jmx -l results-myfaces.jtl -e -o report-output-myfaces`)
 5) run it once for a warmup
 6) clean the results
 7) run again and see the results under /report-output/index.html

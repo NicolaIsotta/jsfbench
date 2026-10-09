@@ -85,7 +85,7 @@
     </context-param>
     <context-param>
         <param-name>com.sun.faces.annotationScanPackages</param-name>
-        <param-value>jsfbench</param-value>
+        <param-value>jsfbench.component</param-value>
     </context-param>
     <context-param>
         <param-name>com.sun.faces.compressViewState</param-name>
